@@ -1,0 +1,17 @@
+mongodb:
+  image: mongo
+  volumes:
+      - ./data:/data/db
+  ports:
+      - "27017:27017"
+
+server:
+  image: node:8
+  command: npm start
+  working_dir: /app
+  volumes:
+    - ./server:/app
+  ports:
+    - "4567:4567"
+  links:
+    - mongodb

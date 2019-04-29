@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>Items sort</title>
+	  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+	  <link rel="stylesheet" type="text/css" href="styles.css">
+	  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
+	  <script src="index.js"></script>
+	  <script src="app.js"></script>
+	</head>
+	<body>
+		<div class="bg-white br1">
+			<h2 class="pl3">Items: <span id="count"></span></h2>
+			<ul id="sortable">			 	
+			</ul>
+			<div class="pa2 pt0">
+				<div class="add" onclick="toggleForm('new')">
+			 		<p class="ma0 pa0">+</p>
+			  	<p class="ma0 pa0">ADD</p>
+			 	</div>
+			</div>
+			<div id="overlay" class="overlay dn">
+				<div id="newItemForm" class="bg-white br1 pa4 animated bounceInDown dn">
+					<div class="mb2">
+						<label for="description" class="mb2 db">
+							Image
+						</label>
+						<img id="itemImage" src="" alt="item image" onerror="this.style.display = 'none';$('#removeImageBtn').hide()"/>
+						<div id="imageError"></div>
+						<div class="flex" id="options">
+							<input id="file" type="file" class="dn" accept="image/gif, image/jpg, image/png" onchange="renderImage(event)">
+					  	<label for="file">upload</label>
+					  	<button id="removeImageBtn">
+					  		remove
+					  	</button>
+					  </div>
+					</div>
+					<div class="mb2">
+						<label for="description" class="mb1 db">
+							Description
+						</label>
+						<textarea class="desc" id="description" placeholder="Description..." rows="4" cols="10" maxlength="300"></textarea>
+						<div>
+							<span id="desc-counter"></span>/300
+						</div>
+					</div>
+					<button id="submit" onclick="this.innerText === 'Create' ? api.post() : update()">
+					</button>
+					<button onclick="toggleForm(this.innerText === 'Create' ? 'new' : 'edit')">
+						Cancel
+					</button>
+				</div>
+				<div id="confirmDelete" class="bg-white br1 pa4 animated bounceInDown dn">
+					<div class="mb2">
+						<h3 class="mb1 db">
+							Are you sure ?
+						</h3>
+					</div>
+					<button onclick="confirmDelete()">
+						Ok
+					</button>
+					<button onclick="toggleForm('confirmDelete')">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
